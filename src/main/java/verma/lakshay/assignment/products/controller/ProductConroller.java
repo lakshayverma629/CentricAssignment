@@ -38,10 +38,10 @@ public class ProductConroller {
     }
 
     @GetMapping("v1/products/search")
-    public ResponseEntity<List<Product>> searchProductsByCategory(@RequestParam("category") String category) {
-        System.out.println("category" + category);
-        List<Product> list = productService.getProductByCategory(category);
-        System.out.println(category);
+    public ResponseEntity<List<Product>> searchProductsByCategory(@RequestParam("category") String category,
+                                                                  @RequestParam(name="limit", defaultValue = "1") Integer limit,
+                                                                  @RequestParam(name="offset", defaultValue = "10") Integer offset) {
+        List<Product> list = productService.getProductByCategory(category,limit,offset);
         return new ResponseEntity<List<Product>>(list, HttpStatus.OK);
     }
 }
